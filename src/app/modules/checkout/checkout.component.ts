@@ -60,7 +60,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       total: this.total,
     }
     console.log(checkout);
-    this.router.navigate(['/review']);
+    this.router.navigate(['/checkout', 'review']);
   }
 
   ngOnDestroy(): void {
@@ -68,3 +68,4 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
 }
+

@@ -5,22 +5,18 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 
-import { HomeRoutingModule } from 'src/app/home/home-routing.module';
+import { HomeRoutingModule } from 'src/app/modules/home/home-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CartComponent } from 'src/app/home/pages/cart/cart.component';
-import { CheckoutComponent } from 'src/app/home/pages/checkout/checkout.component';
-import { HomeComponent } from 'src/app/home/home.component';
-import { ProductDetailComponent } from 'src/app/home/pages/product-detail/product-detail.component';
-import { ReviewComponent } from './pages/review/review.component';
+import { CartComponent } from 'src/app/modules/home/pages/cart/cart.component';
+import { HomeComponent } from 'src/app/modules/home/home.component';
+import { ProductDetailComponent } from 'src/app/modules/home/pages/product-detail/product-detail.component';
 
 
 @NgModule({
   declarations: [
     CartComponent,
-    CheckoutComponent,
     HomeComponent,
     ProductDetailComponent,
-    ReviewComponent,
   ],
   imports: [
     CommonModule,
