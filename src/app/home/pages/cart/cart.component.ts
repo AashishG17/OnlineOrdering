@@ -36,11 +36,9 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   onIncrease(product: ProductInterface): void {
-    console.log('before', product)
     const productCopy = { ...product };
     productCopy.quantity && productCopy.quantity++;
     this.cartService.increaseQuantity(productCopy);
-    console.log('after', product)
   }
 
   ngOnDestroy(): void {

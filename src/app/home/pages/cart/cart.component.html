@@ -20,12 +20,11 @@
                     <td><img [src]="product.images[0]" [alt]="product.name" width="100" class="shadow-4" /></td>
                     <td>{{product.price | currency:'USD'}}</td>
                     <td>
-                        {{ product.quantity }}
-                        <!-- <div class="px-2 py-2 flex align-items-center border-1 border-yellow-50 border-round-xl cursor-pointer w-max">
+                        <div class="px-2 py-2 flex align-items-center border-1 border-yellow-50 border-round-xl cursor-pointer w-max">
                             <i class="my-1 mx-1 pi pi-minus text-yellow-50" (click)="onDecrease(product)"></i>
                             <input type="text" class="text-center border-none bg-transparent w-3rem text-yellow-50" [(ngModel)]="product.quantity" [name]="product.title" disabled>
                             <i class="pi pi-plus my-1 mx-1 text-yellow-50 text-yellow-50" (click)="onIncrease(product)"></i>
-                        </div> -->
+                        </div>
                     </td>
                     <td class="text-center">{{product.price * product.quantity | currency:'USD'}}</td>
                     <td><i class="pi pi-trash" (click)="onRemoveFromCart(product)"></i></td>

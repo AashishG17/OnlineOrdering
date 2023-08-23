@@ -46,7 +46,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   calculate(): void {
-    this.subtotal = this.cartProducts.reduce((sum, product) => sum + product.price, 0);
+    this.subtotal = this.cartProducts.reduce((sum, product) => sum + (product.price * (product.quantity ? product.quantity : 1)), 0);
     this.total = this.subtotal + (13 * this.subtotal / 100)
   }
 

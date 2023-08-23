@@ -32,7 +32,7 @@ export class CartService {
         if (product.id === cartProduct.id) {
           return { ...product, quantity: product.quantity }
         }
-        return product
+        return cartProduct;
       });
     this.cartProducts$.next(updatedProduct);
   }
