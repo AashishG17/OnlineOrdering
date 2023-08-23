@@ -7,22 +7,19 @@ import { ProductInterface } from 'src/app/core/types/products.interface';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit, OnDestroy {
   cartService = inject(CartService);
 
   cartProducts: ProductInterface[] = [];
-  subscription: Subscription[] = [];
+  subscription!: Subscription;
 
   ngOnInit(): void {
-    this.subscription.push(
-      this.cartService.cartProducts$.subscribe({
-        next: (res) => {
-          this.cartProducts = res;
-        },
-      }),
-    );
+    this.subscription = this.cartService.cartProducts$.subscribe({
+      next: (res) => {
+        this.cartProducts = res;
+      },
+    });
   }
 
   onRemoveFromCart(product: ProductInterface): void {
@@ -47,6 +44,6 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.forEach(subscription => subscription.unsubscribe());
+    this.subscription.unsubscribe();
   }
 }
