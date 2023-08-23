@@ -1,0 +1,68 @@
+<article><div class="grid">
+    <div class="sm:col-12 md:col-5">
+        <div class="p-3 border-round-lg">
+            <img class="w-full h-18rem border-round-lg" [src]="productDetails && productDetails.images[0]" [alt]="productDetails && productDetails.title">
+        </div>
+    </div>
+    <div class="sm:col-12 md:col-7">
+        <div class="md:px-4 md:py-2">
+            <div class="text-primary-900">
+                <p class="m-2 text-md font-light">
+                    <span>{{ productDetails && productDetails.brand }}</span>
+                </p>
+                <p class="m-2 text-3xl font-semibold text-yellow-50">{{ productDetails && productDetails.title }}</p>
+                <p class="m-2 text-lg font-medium">
+                    <span class="mr-3 line-through text-primary-900text-xl">{{ calculateDiscount(productDetails && productDetails.price, productDetails && productDetails.discountPercentage) }} $</span>
+                    <span class="text-primary-900text-xl">{{ productDetails && productDetails.price }} $</span>
+                </p>
+            </div>
+            <div class="w-max">
+                <div 
+                    *ngIf="productDetails && !productDetails.updateCart; else cart"
+                    class="px-2 py-2 flex align-items-center border-1 border-yellow-50 hover:bg-yellow-50 hover:text-primary-50 border-round-xl cursor-pointer"
+                    (click)="onAddToCart(productDetails)"
+                >
+                    <p class="my-1 mx-1 text-md font-medium">Add to Cart</p>
+                    <i class="my-1 mx-1 pi pi-shopping-bag"></i>
+                </div>
+                <ng-template #cart>
+                    <div class="px-2 py-2 flex align-items-center border-1 border-yellow-50 border-round-xl cursor-pointer">
+                        <div>
+                            <i
+                                *ngIf="productDetails && productDetails.quantity === 1; else minus" 
+                                class="my-1 mx-1 pi pi-trash text-yellow-50"
+                                (click)="onRemoveFromCart(productDetails)"
+                            ></i>
+                            <ng-template #minus>
+                                <i class="my-1 mx-1 pi pi-minus text-yellow-50" (click)="onDecrease(productDetails)"></i>
+                            </ng-template>
+                        </div>
+                        <input type="text" class="text-center border-none bg-transparent w-3rem text-yellow-50" [value]="productDetails && productDetails.quantity" disabled>
+                        <i class="pi pi-plus my-1 mx-1 text-yellow-50 text-yellow-50" (click)="onIncrease(productDetails)"></i>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="">
+            <p class="m-2 text-lg font-medium">
+                <strong class="mr-1">Description:</strong>
+                <span>{{ productDetails && productDetails.description }}</span>
+            </p>
+            <p class="m-2 text-lg font-medium">
+                <strong class="mr-1">Category:</strong>
+                <span>{{ productDetails && productDetails.category }}</span>
+            </p>
+            <p class="m-2 text-lg font-medium">
+                <strong class="mr-1">Rating:</strong>
+                <span>{{ productDetails && productDetails.rating }}</span>
+            </p>
+            <p class="m-2 text-lg font-medium">
+                <strong class="mr-1">Discount:</strong>
+                <span>{{ productDetails && productDetails.discountPercentage }}%</span>
+            </p>
+        </div>
+    </div>
+</div>
+</article>

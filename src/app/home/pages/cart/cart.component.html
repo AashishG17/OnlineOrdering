@@ -1,0 +1,61 @@
+<div class="grid" *ngIf="cartProducts.length !== 0; else emptyCart">
+    <div class="col-12">
+        <p class="my-1 text-3xl text-yellow-50">Cart</p>
+    </div>
+    <div class="col-12">
+        <p-table [value]="cartProducts" [tableStyle]="{'min-width': '10rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>NAME</th>
+                    <th>IMAGE</th>
+                    <th>PRICE</th>
+                    <th>QUANTITY</th>
+                    <th>SUBTOTAL</th>
+                    <th>ACTION</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td>{{product.title}}</td>
+                    <td><img [src]="product.images[0]" [alt]="product.name" width="100" class="shadow-4" /></td>
+                    <td>{{product.price | currency:'USD'}}</td>
+                    <td>
+                        {{ product.quantity }}
+                        <!-- <div class="px-2 py-2 flex align-items-center border-1 border-yellow-50 border-round-xl cursor-pointer w-max">
+                            <i class="my-1 mx-1 pi pi-minus text-yellow-50" (click)="onDecrease(product)"></i>
+                            <input type="text" class="text-center border-none bg-transparent w-3rem text-yellow-50" [(ngModel)]="product.quantity" [name]="product.title" disabled>
+                            <i class="pi pi-plus my-1 mx-1 text-yellow-50 text-yellow-50" (click)="onIncrease(product)"></i>
+                        </div> -->
+                    </td>
+                    <td class="text-center">{{product.price * product.quantity | currency:'USD'}}</td>
+                    <td><i class="pi pi-trash" (click)="onRemoveFromCart(product)"></i></td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="flex align-items-center justify-content-between">
+                    <p>
+                        {{ cartProducts ? cartProducts.length : 0 }} product{{ cartProducts.length === 1 ? '' : 's' }} in cart.
+                    </p>
+                    <div class="border-1 border-round-xl border-yellow-50 px-4 py-2 hover:bg-yellow-50 hover:text-primary-50 cursor-pointer">
+                        <span routerLink="/checkout">Checkout</span>
+                    </div>
+                </div>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<ng-template #emptyCart>
+    <div class="grid text-center py-3" *ngIf="cartProducts.length === 0">
+        <div class="col-12">
+            <div class="text-2xl text-yellow-50">
+                <h4>Your Cart is Empty</h4>
+            </div>
+        </div>
+        <div class="col-12">
+            <span 
+                class="border-1 border-round-xl border-yellow-50 px-4 py-2 hover:bg-yellow-50 hover:text-primary-50 cursor-pointer" 
+                routerLink="/"
+            >Go Back To Homepage</span>
+        </div>
+    </div>
+</ng-template>

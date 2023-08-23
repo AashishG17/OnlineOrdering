@@ -1,0 +1,49 @@
+<article class="text-primary-900 border-round-lg sm:my-4">
+    <div 
+        class="border-round-lg h-18rem bg-primary-50 align-items-center justify-content-center"
+        [routerLink]="['/product', productProps.title]"
+    >
+        <img class="border-round-lg max-w-full max-h-full" [src]="productProps && productProps.images[0]" alt="">
+    </div>
+    <div class="my-2 p-1">
+        <p 
+            class="my-1 text-md font-light text-overflow-ellipsis overflow-hidden white-space-nowrap"
+        >
+            {{ productProps.brand }}
+        </p>
+        <p
+            class="mt-1 mb-2 text-xl text-overflow-ellipsis overflow-hidden white-space-nowrap cursor-pointer"
+            *ngIf="productProps && productProps.title"
+            [routerLink]="['/product', productProps.title]"
+        >
+            {{ productProps.title }}
+        </p>
+    </div>
+    <div class="mt-3 mb-2 p-1 flex justify-content-between align-items-center">
+        <p class="my-1 font-light"><strong>{{ productProps.price | currency:'USD'}}</strong></p>
+        <div 
+            *ngIf="!productProps.updateCart; else cart"
+            class="px-2 py-2 flex align-items-center border-1 border-yellow-50 hover:bg-yellow-50 hover:text-primary-50 border-round-xl cursor-pointer"
+            (click)="onAddToCart(productProps)"
+        >
+            <p class="my-1 mx-1 text-md font-medium">Add to Cart</p>
+            <i class="my-1 mx-1 pi pi-shopping-bag"></i>
+        </div>
+        <ng-template #cart>
+            <div class="px-2 py-2 flex align-items-center border-1 border-yellow-50 border-round-xl cursor-pointer">
+                <div>
+                    <i
+                        *ngIf="productProps.quantity === 1; else minus" 
+                        class="my-1 mx-1 pi pi-trash text-yellow-50"
+                        (click)="onRemoveFromCart(productProps)"
+                    ></i>
+                    <ng-template #minus>
+                        <i class="my-1 mx-1 pi pi-minus text-yellow-50" (click)="onDecrease(productProps)"></i>
+                    </ng-template>
+                </div>
+                <input type="text" class="text-center border-none bg-transparent w-3rem text-yellow-50" [(ngModel)]="productProps.quantity" disabled>
+                <i class="pi pi-plus my-1 mx-1 text-yellow-50 text-yellow-50" (click)="onIncrease(productProps)"></i>
+            </div>
+        </ng-template>
+    </div>
+</article>

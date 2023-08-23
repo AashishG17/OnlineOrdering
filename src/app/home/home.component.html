@@ -1,0 +1,27 @@
+<p-toast></p-toast>
+<section class="mx-2 my-2 md:mx-4 md:my-4 lg:mx-8 lg:my-4">
+    <div class="mb-4 text-center">
+        <h1 class="text-center text-4xl font-light">Our Products</h1>
+        <div class="field px-8" *ngIf="showSearch$ | async">
+            <div class="p-inputgroup">
+                <input 
+                    class="no-outline"
+                    type="text" placeholder="Search..."
+                    [(ngModel)]="searchText"
+                    (input)="onSearchText()"
+                    pInputText
+                />
+                <span class="p-inputgroup-addon">
+                    <i class="pi pi-search"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="sm:col-12 md:col-4 lg:col-3" *ngFor="let product of products$ | async">
+            <div class="p-1 md:p-3 lg:p-3 border-round-sm bg-primary font-bold">
+                <app-item [product]="product"></app-item>
+            </div>
+        </div>
+    </div>
+</section>

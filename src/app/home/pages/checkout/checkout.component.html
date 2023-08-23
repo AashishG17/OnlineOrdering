@@ -1,0 +1,88 @@
+<p-toast></p-toast>
+<p class="mb-3 text-3xl text-yellow-50">Checkout</p>
+<div class="grid">
+    <div class="col-12 md:col-6">
+        <div class="px-3 py-1 border-1 border-round-xl bg-primary">
+            <p class="text-xl text-primary-900 font-medium mb-6">Presonal Details</p>
+            <form [formGroup]="checkoutForm">
+                <div class="my-5">
+                    <span class="p-float-label">
+                        <input class="w-full" pInputText id="username" formControlName="full_name" />
+                        <label class="text-lg" htmlFor="username">Username</label>
+                    </span>
+                    <small
+                        *ngIf="checkoutForm.controls['full_name']?.touched && checkoutForm.controls['full_name']?.hasError('required')"
+                        class="pt-2 text-red-600 pl-1 text-lg"
+                    >Username is required.</small>   
+                </div>  
+                <div class="my-5">
+                    <span class="p-float-label">
+                        <input class="w-full" pInputText id="address" formControlName="address" />
+                        <label class="text-lg" htmlFor="address">Address</label>
+                    </span>
+                    <small
+                        *ngIf="checkoutForm.controls['address']?.touched && checkoutForm.controls['address']?.hasError('required')"
+                        class="pt-2 text-red-600 pl-1 text-lg"
+                    >Address is required.</small>   
+                </div>  
+                <div class="my-5">
+                    <span class="p-float-label">
+                        <input class="w-full" pInputText id="card_number" formControlName="card_number" />
+                        <label class="text-lg" htmlFor="card_number">Card Number</label>
+                    </span>
+                    <small 
+                        *ngIf="checkoutForm.controls['card_number']?.touched && checkoutForm.controls['card_number']?.hasError('required')"
+                        class="pt-2 text-red-600 pl-1 text-lg"
+                    >Cardnumber is required.</small>
+                </div>  
+                <div class="my-5">
+                    <span class="p-float-label">
+                        <input class="w-full" pInputText id="expiry_date" formControlName="expiry_date" />
+                        <label class="text-lg" htmlFor="expiry_date">Expiry Date</label>
+                    </span>
+                    <small 
+                        *ngIf="checkoutForm.controls['expiry_date']?.touched && checkoutForm.controls['expiry_date']?.hasError('required')"
+                        class="pt-2 text-red-600 pl-1 text-lg"
+                    >Expiry date is required.</small>   
+                </div>  
+            </form>
+        </div>
+    </div>
+    <div class="col-12 md:col-6">
+        <div class="px-3 py-3 border-1 border-round-xl bg-primary">
+            <p class="text-xl text-primary-900 font-medium mb-4">Order Summary</p>
+            <hr>
+            <ul class="px-0 text-primary-900 list-none">
+                <li *ngFor="let product of cartProducts">
+                    <div class="flex justify-content-between">
+                        <span class="my-2">{{ product.title }} x {{ product.quantity }}</span>
+                        <span class="my-2">{{ product.quantity && product.price * product.quantity | currency:'USD' }}</span>
+                    </div>
+                </li>
+            </ul>
+            <hr>
+            <div class="text-primary-900 text-right">
+                <div class="flex justify-content-between">
+                    <div class="text-left">
+                        <p>Item Total</p>
+                        <p>Tax</p>
+                        <p>Total</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="ml-1">{{ subtotal | currency:'USD' }}</p>
+                        <p class="ml-1">13 %</p>
+                        <p class="ml-1">{{ total | currency:'USD' }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="my-2">
+                <span 
+                    class=" text-primary-900 font-medium border-1 border-round-xl border-yellow-50 px-4 py-2 w-max hover:bg-yellow-50 hover:text-primary-50 cursor-pointer"
+                    (click)="onCheckout()"
+                >
+                    Proceed To Checkout
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
